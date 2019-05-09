@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+        quu..__
+         $$$b  `---.__
+          "$$b        `--.                          ___.---uuudP
+           `$$b           `.__.------.__     __.---'      $$$$"              .
+             "$b          -'            `-.-'            $$$"              .'|
+               ".                                       d$"             _.'  |
+                 `.   /                              ..."             .'     |
+                   `./                           ..::-'            _.'       |
+                    /                         .:::-'            .-'         .'
+                   :                          ::''\          _.'            |
+                  .' .-.             .-.           `.      .'               |
+                  : /'$$|           .@"$\           `.   .'              _.-'
+                 .'|$u$$|          |$$,$$|           |  <            _.-'
+                 | `:$$:'          :$$$$$:           `.  `.       .-'
+                 :                  `"--'             |    `-.     \
+                :##.       ==             .###.       `.      `.    `\
+                |##:                      :###:        |        >     >
+                |#'     `..'`..'          `###'        x:      /     /
+                 \                                   xXX|     /    ./
+                  \                                xXXX'|    /   ./
+                  /`-.                                  `.  /   /
+                 :    `-  ...........,                   | /  .'
+                 |         ``:::::::'       .            |<    `.
+                 |             ```          |           x| \ `.:``.
+                 |                         .'    /'   xXX|  `:`M`M':.
+                 |    |                    ;    /:' xXXX'|  -'MMMMM:'
+                 `.  .'                   :    /:'       |-'MMMM.-'
+                  |  |                   .'   /'        .'MMM.-'
+                  `'`'                   :  ,'          |MMM<
+                    |                     `'            |tbap\
+                     \                                  :MM.-'
+                      \                 |              .''
+                       \.               `.            /
+                        /     .:::::::.. :           /
+                       |     .:::::::::::`.         /
+                       |   .:::------------\       /
+                      /   .''               >::'  /
+                      `',:                 :    .'
+                                           `:.:'
+                          皮卡丘会放电, 欢迎关注我
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Pikachu</title>
+    <link rel="icon" href="/static/img/icon.png" type="image/x-icon">
+
+    <style type="text/css">
+        .button{
+            border: none;
+	        display: inline-block;
+	        overflow: hidden;
+            width: 200px;
+	        perspective:400px;
+	        background-color: transparent;
+
+            -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.3)));
+
+        }
+        .button span{
+            display: block;
+            position: relative;
+            transition:0.3s ease-in-out all;
+            transform-origin:50% 0;
+            transform-style:preserve-3d;
+            background-color: black;
+            color: white;
+            font-size: 28px;
+            font-family: "Microsoft YaHei UI Light";
+            width: 100%;
+            height: 100%;
+        }
+        .button span:after{
+            display: block;
+            content: attr(data-title);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition:0.3s ease-in-out all;
+            transform-origin:50% 0;
+            transform:translate3d(0px,105%,0px) rotateX(-90deg);
+            background-color: white;
+            color: black;
+            width: 100%;
+            height: 100%;
+        }
+
+        .button:hover span{
+            transform:translate3d(0px,0px,-30px) rotateX(90deg);
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="text-align: center">
+        <img src="/static/img/404.png"> <br>
+        <span style="font-size: 36px; font-weight: bold; font-family: 'Microsoft YaHei UI'">Oops! The page disappeared!</span> <br><br>
+        <span style="font-size: 28px; font-family: 'Microsoft YaHei UI Light'">你遇到了来自网络的神秘力量...</span> <br><br>
+        <button class="button">
+            <a href="http://www.ipikachu.cn/index" style="text-decoration: none"><span data-title="HOME PAGE">CLICK ME</span></a>
+        </button>
+    </div>
+</body>
+</html>

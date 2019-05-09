@@ -1,0 +1,16 @@
+/***IPC链接的样式***/
+
+.IPC:link{
+    color: white;
+    text-decoration: underline;
+}
+.IPC:visited{
+    color: white;
+    text-decoration: underline;
+}
+.IPC:hover {
+    font-size: 100%;
+    text-decoration: underline;
+}
+
+

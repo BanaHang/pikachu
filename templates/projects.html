@@ -1,0 +1,183 @@
+{% extends "template_1.html" %}
+
+{% block mainbody %}
+
+    <link rel="stylesheet" href="/static/css/autocomplete.css">
+
+    <style type="text/css">
+    #text{
+        width: 200px;
+        height: 30px;
+        padding-left: 15px;
+        border-radius: 40px;
+        border: 2px solid;
+        background: #F9F0DA;
+        outline: none;
+        position: relative;
+        transition: 0.3s linear;
+    }
+
+    #text:focus{
+        width: 250px;
+    }
+
+    #button{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-image: url("/static/img/search.png");
+        background-color: #F9F0DA;
+        background-size: 100% 100%;
+        border: none;
+        border-radius: 40px;
+        position: absolute;
+        top: 13px;
+        right: 18px;
+    }
+
+    a:link{
+        color: white;
+        text-decoration: none;
+    }
+    a:visited{
+        color: white;
+        text-decoration: none;
+    }
+    a:hover{
+        color: white;
+        font-size: 120%;
+        text-decoration: none;
+    }
+
+    .page li{
+        display: inline-block;
+        list-style: none;
+        border: 1px solid #ffffff;
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    .page li:hover{
+        background-color: #dddddd;
+        color: #222222;
+        transition: background-color 0.3s;
+    }
+
+    .page li a:hover{
+        color: #222222;
+        font-size: 100%;
+    }
+
+    #pagebutton {
+        border-style: none;
+        background-color: rgba(255, 255, 255, 0);
+        cursor: pointer;
+        color: white;
+    }
+
+    #pagebutton:hover{
+        color: #222222;
+    }
+
+    </style>
+
+    <script>
+        function showHint(str) // 搜索框自动补全
+        {
+            var xmlhttp;
+            if (str.length==0)
+            {
+                var element = document.getElementById("titlelist");
+                element.innerHTML="";
+                return;
+            }
+            if (window.XMLHttpRequest)
+            {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+                {
+                    // IE6, IE5 浏览器执行代码
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange=function()
+                {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        var responsetext=xmlhttp.responseText;
+                        var textlist = responsetext.split(";");
+
+                        var element = document.getElementById("titlelist");
+                        element.innerHTML="";
+                        for (i in textlist)
+                        {
+                            var title = document.createElement("li");
+                            title.setAttribute('class', 'title');
+                            title.setAttribute('id', 'li'+ i);
+                            title.setAttribute('onclick', 'textfill(this.id)')
+                            var node = document.createTextNode(textlist[i]);
+                            title.appendChild(node);
+                            element.appendChild(title);
+                        }
+                    }
+                }
+            xmlhttp.open("GET","http://www.ipikachu.cn/autocomplete?word="+str,true);
+            xmlhttp.send();
+        }
+    </script>
+
+    <script>
+        function textfill(thisid) // 搜索框填入
+        {
+            title = document.getElementById(thisid)
+            bar = document.getElementById('text')
+            bar.value = title.innerText
+        }
+    </script>
+
+    <div id="selectbar" style="position: relative; top: 20px; padding: 10px 0px 10px 0px; right: 20%; left: 20%; width: 60%; height: 35px; background: rgba(255, 255, 255, 0.2); border-radius: 10px">
+        <form method="get" action="/projects" style="float: right; margin-right: 10px">
+            <p style="position: absolute; top: 0px; left: 25px; color: white">项目列表：</p>
+            <input id="text" name="key" type="text" placeholder="请输入关键字..." width="200px" onkeyup="showHint(this.value)">
+            <input id="button" type="submit" value="">
+        </form>
+        <ul id = "titlelist"></ul>
+    </div>
+
+    <div id="projectlist" style="color: white;padding-bottom: 15px; position: relative; top: 30px; right: 20%; left: 20%; width: 60%; background: rgba(255, 255, 255, 0.2); border-radius: 10px">
+        <ul style="padding: 25px">
+        {% for i in data %}
+            <li style="border-color: white; border-width: 2px; border-style: solid; list-style: none; margin-bottom: 12px; padding: 10px 40px 10px 40px">
+                <img src="/static/img/link.png" style="height: 20px; width: 20px; vertical-align: middle">
+                <a href="127.0.0.1:8000/projects/p{{i.0 }}" style="vertical-align: middle;" >
+                    <span style="vertical-align: middle;max-width: 450px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block">{{ i.1 }}</span>
+                </a>
+                <span style="position: absolute; right: 50px; vertical-align: middle">完成时间：{{ i.2 }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+        {% if current_page %}
+            <form method="get" action="/projects" style="text-align: center; margin-top: 50px">
+            <ul class="page">
+                <li><a href="127.0.0.1:8000/projects/?page=first"> << </a></li>
+                <li><a href="127.0.0.1:8000/projects/?page=previous"> < </a></li>
+                <li>页码：<input name="page" type="number" style="width: 40px;" value='{{ current_page }}' min="1"></li>
+                <li><a href="127.0.0.1:8000/projects/?page=next"> > </a></li>
+                <li><a href="127.0.0.1:8000/projects/?page=last"> >> </a></li>
+                <li><input id="pagebutton" type="submit" value="GO"></li>
+            </ul>
+        </form>
+
+        {% endif %}
+
+    </div>
+    <div style="margin-top: 80px; text-align: center">
+        <span style="color: white">
+            <a class="IPC" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33022502000159" target="_blank"><img src="/static/img/备案图标.png" style="vertical-align: middle" />浙公网安备 33022502000159号</a>&nbsp;&nbsp;
+            <a class="IPC" href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备18031016号-1</a>
+        </span>
+    </div>
+
+</div>
+{% endblock %}

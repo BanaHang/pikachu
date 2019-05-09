@@ -1,0 +1,26 @@
+/***搜索自动补全列表的样式***/
+
+#titlelist {
+    position: relative;
+    left: 62%;
+    top: 60%;
+    list-style-type: none;
+    z-index: 10;
+}
+
+.title {
+    background-color: #F2F4F4;
+    border-bottom: #85929E;
+    max-width: 240px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-family: "Microsoft JhengHei UI Light";
+}
+
+.title:hover{
+    cursor: pointer;
+    background-color: #154360;
+    color: white;
+}

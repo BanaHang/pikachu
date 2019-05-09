@@ -1,0 +1,117 @@
+{% extends "template_1.html" %}
+
+{% block mainbody %}
+
+    <style type="text/css">
+            a:link{
+                color: white;
+                text-decoration: none;
+            }
+            a:visited{
+                color: white;
+                text-decoration: none;
+            }
+            a:hover{
+                color: white;
+                font-size: 120%;
+                text-decoration: none;
+            }
+
+            .page li{
+                display: inline-block;
+                list-style: none;
+                border: 1px solid #ffffff;
+                padding: 8px;
+                font-size: 18px;
+            }
+
+            .page li:hover{
+                background-color: #dddddd;
+                color: #222222;
+                transition: background-color 0.3s;
+            }
+
+            .page li a:hover{
+                color: #222222;
+                font-size: 100%;
+            }
+
+            #pagebutton {
+                border-style: none;
+                background-color: rgba(255, 255, 255, 0);
+                cursor: pointer;
+                color: white;
+            }
+
+            #pagebutton:hover{
+                color: #222222;
+            }
+
+            .IPC:link{
+                color: white;
+                text-decoration: underline;
+            }
+            .IPC:visited{
+                color: white;
+                text-decoration: underline;
+            }
+            .IPC:hover {
+                font-size: 100%;
+                text-decoration: underline;
+            }
+
+    </style>
+
+
+    <div id="banner" style="z-index: -1; position: relative; top: 20px; right: 20%; left: 20%; width: 60%; height: 35px; padding: 15px 0px; background: rgba(255, 255, 255, 0.2); border-radius: 10px; text-align: center; vertical-align: middle; color: white">
+        <span style="font-size: 24px; font-weight: bold">欢迎来到留言区，在这里你可以畅所欲言</span>
+    </div>
+
+    <div id="plate" style="color: white;padding-bottom: 15px; position: relative; top: 30px; right: 20%; left: 20%; width: 60%; background: rgba(255, 255, 255, 0.2); border-radius: 10px">
+        <ul style="padding: 25px">
+        {% for i in data %}
+            <li style="border-color: white; border-width: 2px; border-style: solid; list-style: none; margin-bottom: 12px; padding: 10px 40px 10px 40px">
+                <a href="http://127.0.0.1:8000/content/?plateid={{i.0 }}">
+                   <span style="max-width: 400px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block">{{ i.1 }}</span>
+                </a>
+                <span style="position: absolute; right: 190px; color: #96CDCD; font-size: 14px; max-width: 110px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block">
+                    <img src="/static/img/writer.png" style="height: 20px; width: 20px; vertical-align: middle">{{ i.4 }}
+                </span>
+                <span style="position: absolute; right: 50px; color: #96CDCD; font-size: 14px;">{{ i.3 }}</span>
+                <hr>
+                <p style="font-size: 14px; max-width: 680px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block">{{ i.2 }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+
+    {% if current_page %}
+        <form  method="get" action="/plate" style="text-align: center; margin-top: 5px">
+            <ul class="page">
+                <li><a href="http://127.0.0.1:8000/plate/?page=first"> << </a></li>
+                <li><a href="http://127.0.0.1:8000/plate/?page=previous"> < </a></li>
+                <li>页码：<input name="page" type="number" style="width: 40px;" value='{{ current_page }}' min="1"></li>
+                <li><a href="http://127.0.0.1:8000/plate/?page=next"> > </a></li>
+                <li><a href="http://127.0.0.1:8000/plate/?page=last"> >> </a></li>
+                <li><input id="pagebutton" type="submit" value="GO" style="font-size: 18px"></li>
+            </ul>
+        </form>
+    {% endif %}
+
+        <form method="get" action="/plate" >
+            {% csrf_token %}
+            <div style="border-color: white; border-style: solid; border-width: 2px; margin: 20px; padding: 15px 30px;">
+                标题：<input name="title" type="text" required="required" placeholder="请输入标题..." maxlength="66" style="padding: 5px; width: 50%">&nbsp&nbsp&nbsp&nbsp
+                昵称：<input name="nickname" type="text" required="required" placeholder="请留下一个昵称..." maxlength="30" style="padding: 5px; width: 25%"><br><br>内容：<br>
+                <textarea name="content" required="required" placeholder="请输入内容..." maxlength="500" style="padding: 5px; width: 100%; height: 100px"></textarea>
+                <center><input type="submit" value="发布" style="padding: 5px 20px; border-color: white; cursor: pointer"></center>
+            </div>
+        </form>
+
+    </div>
+    <div style="margin-top: 80px; text-align: center">
+        <span style="color: white">
+            <a class="IPC" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33022502000159" target="_blank"><img src="/static/img/备案图标.png" style="vertical-align: middle" />浙公网安备 33022502000159号</a>&nbsp;&nbsp;
+            <a class="IPC" href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备18031016号-1</a>
+        </span>
+    </div>
+{% endblock %}

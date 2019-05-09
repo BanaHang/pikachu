@@ -1,0 +1,14 @@
+
+/***首页body和canvas的样式***/
+body {
+	background-image: url("/static/img/bg-1.jpg");
+	background-size: contain;
+	overflow: hidden;
+	margin: 0;
+	text-align: center;
+}
+
+canvas {
+	cursor: crosshair;
+	display: block;
+}

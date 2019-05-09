@@ -1,0 +1,47 @@
+{% extends "template_1.html" %}
+
+{% block mainbody %}
+
+    <style type="text/css">
+        .content{
+            margin:35px;
+        }
+
+        .title{
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        a:link{
+            color: white;
+            text-decoration: underline;
+        }
+        a:visited{
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+
+
+    <div id="about" style="color: white;margin-bottom:30px; padding-top: 10px; padding-bottom: 15px; position: relative; top: 45px; right: 20%; left: 20%; width: 60%; background: rgba(255, 255, 255, 0.2); border-radius: 10px">
+        <div class="content">
+            <span class="title">关于本网站：</span><br><br>
+            <span>本网站为个人站，作为补充个人公众号“皮卡丘会放电”所发布的内容而建设，相关内容想了解更多请关注公众号。</span><br>
+            <span>原本想打造本网站为“皮卡丘会放电”粉丝线上匿名交友平台→_→，由于开设论坛备案流程太复杂，暂时搁置。论坛功能暂且不开启。</span>
+        </div>
+        <div class="content">
+            <span class="title">公众号：皮卡丘会放电</span><br><br>
+            <img src="/static/img/WeChat.jpg">
+        </div>
+        <div class="content">
+            <span class="title">关于个人：</span><br><br>
+            <a href="https://www.zhihu.com/people/shi-hang-1-95/activities" target="_blank">知乎，带我装逼带我飞。</a>
+        </div>
+    </div>
+    <div style="margin-top: 80px; text-align: center">
+        <span style="color: white">
+            <a class="IPC" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33022502000159" target="_blank"><img src="/static/img/备案图标.png" style="vertical-align: middle" />浙公网安备 33022502000159号</a>&nbsp;&nbsp;
+            <a class="IPC" href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备18031016号-1</a>
+        </span>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+/***分液器的样式***/
+
+.page li{
+    display: inline-block;
+    list-style: none;
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 18px;
+}
+
+.page li:hover{
+    background-color: #dddddd;
+    color: #222222;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.page li a:link{
+    color: black;
+    text-decoration: none;
+}
+
+.page li a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.page li a:hover{
+    color: #222222;
+    font-size: 100%;
+}
+
+#pagebutton {
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    color: black;
+}
+
+#pagebutton:hover{
+    color: #222222;
+}

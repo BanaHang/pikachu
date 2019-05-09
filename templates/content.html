@@ -1,0 +1,77 @@
+{% extends "template_1.html" %}
+{% block mainbody %}
+
+    <link rel="stylesheet" href="/static/css/pagedivider.css">
+
+    <style type="text/css">
+        #platelist{
+            padding: 15px;
+            margin-top: 0px;
+        }
+        #platelist li {
+            list-style: none;
+        }
+    </style>
+
+
+    <script>
+    function link(pid) {
+        var e = document.getElementById("page")
+        var alink = document.getElementById("submit")
+        alink.setAttribute("href", "http://127.0.0.1:8000/content/?plateid="+pid+"&page="+e.value.toString())
+    }
+    </script>
+
+    <div style="z-index:-1; position: relative; left: 20%; width: 60%; background: rgba(255, 255, 255, 0.2); border-radius: 10px; text-align: center; margin-top: 30px; padding: 15px 0px">
+        <span style="font-size: 24px; font-weight: bold">自由源自自律，请你注意言辞</span>
+    </div>
+    <div style="position: relative; left: 20%; width: 60%; background-color: white;border-style: solid; border-width: 3px; border-radius: 10px; margin-top: 30px; padding-top: 5px; padding-bottom: 15px">
+        <ul id="platelist">
+            {% if content %}
+                <li id="plate">
+                    <span style="font-size: 20px">{{ content.1 }}</span> <br><hr style="width: 95%">
+                    <span>
+                        <img src="/static/img/writer2.png" style="height: 20px; width: 20px; vertical-align: middle">
+                        {{ content.4 }}
+                    </span>
+                    <span style="position: absolute; left: 70%">时间：{{ content.3 }}</span> <br><hr style="width: 95%">
+                    <p style="border-style: solid; border-width: 1px; border-color: #85929E; padding: 10px">{{ content.2 }}</p>
+                </li> <hr style="border-width: 1.5px; border-color: #222222"><br>
+            {% endif %}
+            {% for i in data %}
+                <li class="follows">
+                    <span>
+                        <img src="/static/img/writer2.png" style="height: 20px; width: 20px; vertical-align: middle">
+                        {{ i.4 }}
+                    </span>
+                    <span style="position: absolute; left: 70%">时间：{{ i.2 }}</span> <br><hr style="width: 95%">
+                    <p style="border-style: solid; border-width: 1px; border-color: #85929E; padding: 10px">{{ i.3 }}</p>
+                </li> <hr style="border-width: 1.5px; border-color: #222222"><br>
+            {% endfor %}
+        </ul>
+
+        {% if current_page %}
+        <form  method="get" action="/content" style="text-align: center; margin-top: 5px">
+            <ul class="page">
+                <li><a href="http://127.0.0.1:8000/content/?plateid={{content.0 }}&page=first"> << </a></li>
+                <li><a href="http://127.0.0.1:8000/content/?plateid={{content.0 }}&page=previous"> < </a></li>
+                <li>页码：<input id="page" type="number" style="width: 40px;" value='{{ current_page }}' min="1"></li>
+                <li><a href="http://127.0.0.1:8000/content/?plateid={{content.0 }}&page=next"> > </a></li>
+                <li><a href="http://127.0.0.1:8000/content/?plateid={{content.0 }}&page=last"> >> </a></li>
+                <li><a id="submit" onclick="link({{content.0 }})"> GO </a></li>
+            </ul>
+        </form>
+        {% endif %}
+
+        <form method="get" action="/content" >
+            {% csrf_token %}
+            <div style="border-color: black; border-style: solid; border-width: 2px; margin: 20px; padding: 15px 30px;">
+                昵称：<input name="nickname" type="text" required="required" placeholder="请留下一个昵称..." maxlength="30" style="padding: 5px; width: 25%">
+                <input name="plateid" hidden="hidden" value="{{content.0 }}">
+                &nbsp;&nbsp;&nbsp;&nbsp;内容：<br><br>
+                <textarea name="content" required="required" placeholder="请输入内容..." maxlength="500" style="padding: 5px; width: 100%; height: 100px"></textarea>
+                <center><input type="submit" value="发布" style="padding: 5px 20px; border-color: white; cursor: pointer"></center>
+            </div>
+        </form>
+    </div>
+{% endblock %}

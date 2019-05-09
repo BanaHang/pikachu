@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Pikachu</title>
+    <link rel="icon" href="/static/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/game.css" media="screen" type="text/css" />
+
+<!--
+ * 引用了开源游戏，来源如下：
+ * @author Sakri Rosenstrom
+ * http://www.sakri.net
+ * https://twitter.com/sakri
+ * http://www.devstate.net
+ * Sources for this can be found at:
+ * https://github.com/sakri/sakriNetCommonJS
+ -->
+</head>
+<body>
+    <div id="canvasContainer"></div>
+    <span id="textInputSpan">
+        输入一句话 (8个字符以内) :
+        <input id="textInput" maxlength="10" type="text" width="150" />
+        <button onclick="changeText()">GO!</button>
+    </span>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>
